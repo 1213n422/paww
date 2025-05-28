@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>CAT EYE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 안내 배너 -->
+  <div class="banner top">scroll up - zoom out</div>
+  <div class="banner bottom">scroll down - zoom in</div>
+
+  <!-- 이미지 컨테이너 -->
+  <div id="container"></div>
+
+  <script>
+    const totalImages = 25;
+    let currentIndex = 1;
+    let isThrottled = false;
+
+    const container = document.getElementById('container');
+
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement('img');
+      img.src = `c${i}.png`;
+      img.style.opacity = i === currentIndex ? '1' : '0';
+      img.dataset.index = i;
+      container.appendChild(img);
+    }
+
+    const showImage = (index) => {
+      const images = document.querySelectorAll('#container img');
+      images.forEach(img => {
+        img.style.opacity = img.dataset.index == index ? '1' : '0';
+      });
+    };
+
+   const onWheel = (e) => {
+  if (isThrottled) return;
+  isThrottled = true;
+  setTimeout(() => isThrottled = false, 100);
+
+  if (e.deltaY < 0) {
+    // scroll up → zoom in
+    if (currentIndex < totalImages) currentIndex++;
+  } else {
+    // scroll down → zoom out
+    if (currentIndex > 1) currentIndex--;
+  }
+
+  showImage(currentIndex);
+};
+
+
+    window.addEventListener('wheel', onWheel);
+  </script>
+
+</body>
+</html>

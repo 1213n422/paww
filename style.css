@@ -1,0 +1,41 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background: black;
+  overflow: hidden;
+}
+
+/* 겹쳐진 이미지 설정 */
+img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* 안내 배너 공통 스타일 */
+.banner {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 5px 0;
+  font-family: sans-serif;
+  z-index: 1000;
+  pointer-events: none; /* 클릭 막힘 방지 */
+}
+
+/* 상단 배너 */
+.banner.top {
+  top: 0;
+}
+
+/* 하단 배너 */
+.banner.bottom {
+  bottom: 0;
+}
